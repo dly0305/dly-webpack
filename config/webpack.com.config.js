@@ -2,6 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
+
 const commonConfig = {
     entry: {
         main: './src/index.js',
@@ -101,8 +103,14 @@ const commonConfig = {
         new HtmlWebpackPlugin({
             template: "src/index.html"
         }),
-        new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin({filename: 'css/[name].css'})
+        new CopyPlugin([
+            {
+                from: './src/public',
+                to: 'public',
+            },
+        ]),
+        new MiniCssExtractPlugin({filename: 'css/[name].css'}),
+        new CleanWebpackPlugin()
     ],
 }
 
