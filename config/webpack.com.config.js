@@ -9,7 +9,7 @@ const commonConfig = {
     output: {
         filename: "[name].js",  // 占位符 重命名(可以打包多个)
         chunkFilename: "[name].chunk.js",  // 分割的名称
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
         // publicPath: "https://cdn.com"  // 打包后src 拼接域名
     },
     // 不知道怎么办的时候,进入到这个模块里找
@@ -100,8 +100,9 @@ const commonConfig = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "src/index.html"
-        }), new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin()
+        }),
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({filename: 'css/[name].css'})
     ],
 }
 
