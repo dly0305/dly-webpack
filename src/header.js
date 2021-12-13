@@ -1,4 +1,4 @@
-import img from './微信图片_20210908142740.jpg'
+import img from './assets/微信图片_20210908142740.jpg'
 import './index.less'
 function Header() {
     const root = document.getElementById('root')  //获取root节点

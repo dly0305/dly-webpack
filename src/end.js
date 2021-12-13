@@ -1,4 +1,4 @@
-import img from './微信图片_20210908142740.jpg'
+import img from './assets/微信图片_20210908142740.jpg'
 import style from'./img2.less'
 function End() {
 //    图片打包
