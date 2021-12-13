@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
+const WebpackBar = require('webpackbar');
 const commonConfig = require('./webpack.com.config')
+
 const devConfig = {
     mode: "development",
     // development
@@ -19,7 +21,8 @@ const devConfig = {
         usedExports: true, //开启器treeShaking,被使用的打包 // 线上没必要
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new WebpackBar(),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 }
 module.exports = merge(commonConfig, devConfig)
