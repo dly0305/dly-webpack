@@ -1,25 +1,17 @@
-const webpack = require('webpack')
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-module.exports = {
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const commonConfig = {
     entry: {
-        // lodash: './src/lodash.js',
         main: './src/index.js',
-        // sub: './src/index.js',
-
     },
     output: {
-      // filename: "bundle.js",
-      filename: "[name].js",  // 重命名
-      chunkFilename: "[name].chunk.js",  // 分割的名称
-      path: path.resolve(__dirname, 'dist'),
-      // publicPath: "https://cdn.com"  // 打包后src 拼接域名
+        filename: "[name].js",  // 占位符 重命名(可以打包多个)
+        chunkFilename: "[name].chunk.js",  // 分割的名称
+        path: path.resolve(__dirname, 'dist'),
+        // publicPath: "https://cdn.com"  // 打包后src 拼接域名
     },
-    // devtool: "none",
-    // development
-    devtool: "eval-cheap-module-source-map",
-    mode: "development",
     // 不知道怎么办的时候,进入到这个模块里找
     module: {
         rules: [
@@ -52,12 +44,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
             },
             {
                 test: /\.less$/,
                 use: [{
-                    loader: "style-loader"
+                    loader: MiniCssExtractPlugin.loader
                 }, {
                     loader: "css-loader",
                     options: {
@@ -83,20 +75,7 @@ module.exports = {
             }
         ]
     },
-    devServer: {
-        // contentBase: './dist',
-        open: true, // 自动打开浏览器
-        historyApiFallback: true,
-        // watchContentBase: true, // 在文件修改之后，会触发一次完整的页面重载。
-        port: 8000, // 端口号
-        proxy: {  // 代理
-            '/api': 'http://localhost:3000'
-        },
-        hot: true, // 热替换  // css应用
-        // hotOnly: true  // 如果模块热替换功能不生效，则不刷新网页
-    },
     optimization: {
-        usedExports: true, //开启器treeShaking,被使用的打包
         splitChunks: {
             chunks: "all", // 代码分割了
             minSize: 30000,
@@ -111,13 +90,10 @@ module.exports = {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     priority: -10,
-                    // filename: "vendors.js"
                 },
                 default: {
                     priority: -20,
                     reuseExistingChunk: true,
-                    // filename: "common.js"
-
                 }
             }
         }
@@ -126,6 +102,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "src/index.html"
         }), new CleanWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new MiniCssExtractPlugin()
     ],
 }
+
+module.exports = commonConfig
