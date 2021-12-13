@@ -9,6 +9,13 @@ module.exports = {
         // sub: './src/index.js',
 
     },
+    output: {
+      // filename: "bundle.js",
+      filename: "[name].js",  // 重命名
+      chunkFilename: "[name].chunk.js",  // 分割的名称
+      path: path.resolve(__dirname, 'dist'),
+      // publicPath: "https://cdn.com"  // 打包后src 拼接域名
+    },
     // devtool: "none",
     // development
     devtool: "eval-cheap-module-source-map",
@@ -76,15 +83,8 @@ module.exports = {
             }
         ]
     },
-    output: {
-        // filename: "bundle.js",
-        filename: "[name].js",  // 重命名
-        chunkFilename: "[name].chunk.js",  // 分割的名称
-        path: path.resolve(__dirname, 'dist'),
-        // publicPath: "https://cdn.com"  // 打包后src 拼接域名
-    },
     devServer: {
-        contentBase: './dist',
+        // contentBase: './dist',
         open: true, // 自动打开浏览器
         historyApiFallback: true,
         // watchContentBase: true, // 在文件修改之后，会触发一次完整的页面重载。
