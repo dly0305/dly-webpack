@@ -1,9 +1,16 @@
-import Header from "./header";
-import End from "./end";
+// import Header from "./header";
+// import End from "./end";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Router from './Router';
 
+ReactDOM.render(
+  <Router />,
+  document.getElementById('root')
+);
 
-Header();
-End();
+// Header();
+// End();
 // //
 // import ReactDOM from 'react-dom';
 // import React, { Component } from 'react';
@@ -50,11 +57,6 @@ End();
 // console.log(`13`, 13)
 
 
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import Router from './Router';
-//
-// ReactDOM.render(
-//     <Router />,
-//     document.getElementById('root')
-// );
+
+
+

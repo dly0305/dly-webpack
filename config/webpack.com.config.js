@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
+const resolve = dir => path.resolve(__dirname, dir);
 
 const commonConfig = {
     entry: {
@@ -13,6 +14,12 @@ const commonConfig = {
         chunkFilename: "[name].chunk.js",  // 分割的名称
         path: path.resolve(__dirname, '../dist'),
         // publicPath: "https://cdn.com"  // 打包后src 拼接域名
+    },
+    resolve: {
+      // 设置别名
+      alias: {
+        '@': resolve('../src')// 这样配置后 @ 可以指向 src 目录
+      }
     },
     // 不知道怎么办的时候,进入到这个模块里找
     module: {
